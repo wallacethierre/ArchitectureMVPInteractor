@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+
+    def API_URL = "API_URL"
+
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "cesar.org.br.architecturetemplate"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        development {
+            applicationIdSuffix ".development"
+            versionNameSuffix ".dev"
+            buildConfigField "String", API_URL, '"http://url.com"'
+            dimension "default"
+        }
+
+        production {
+            buildConfigField "String", API_URL, '"http://url.com"'
+            dimension "default"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$test_espresso_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+
+    implementation "com.squareup.retrofit2:converter-moshi:$moshi_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_rxjava_adapter_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxjava_android_version"
+
+    //Dependency Injection
+    implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
+    implementation "org.kodein.di:kodein-di-framework-android:$kodein_version"
+}

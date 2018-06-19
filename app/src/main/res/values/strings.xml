@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ArchitectureTemplate</string>
+    <string name="content">ID: %s\nName: %s</string>
+</resources>
